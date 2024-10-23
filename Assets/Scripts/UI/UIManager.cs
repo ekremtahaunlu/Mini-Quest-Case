@@ -1,14 +1,14 @@
 using System.Globalization;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI
 {
 	public class UIManager : MonoBehaviour
 	{
-		public Text countdownText;
-		public Text timerText;
-		public Text scoreboardText;
+		public TextMeshProUGUI countdownText;
+		public TextMeshProUGUI timerText;
+		public TextMeshProUGUI scoreboardText;
 
 		public void UpdateCountdown(int countdown)
 		{

@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using Photon.Realtime;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Managers
 {
 	public class ScoreManager : MonoBehaviour
 	{
-		public Text scoreboardText;
+		public TextMeshProUGUI scoreboardText;
 		private readonly Dictionary<Player, int> _playerScores = new();
 
 		public void AddScore(Player player, int score)

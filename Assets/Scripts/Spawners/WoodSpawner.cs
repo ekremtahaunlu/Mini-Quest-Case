@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Spawners
 {
@@ -6,27 +7,24 @@ namespace Spawners
 	{
 		public GameObject woodPrefab;
 		public Transform[] spawnPoints;
-		public float spawnInterval = 5f;
-		private bool _isSpawning = false;
+		public int numberOfWoodsToSpawn = 10;
 
 		public void StartSpawning()
 		{
-			_isSpawning = true;
-			InvokeRepeating(nameof(SpawnWood), 1f, spawnInterval);
+			StartCoroutine(SpawnWood());
 		}
 
-		public void StopSpawning()
+		private IEnumerator SpawnWood()
 		{
-			_isSpawning = false;
-			CancelInvoke(nameof(SpawnWood));
-		}
-
-		private void SpawnWood()
-		{
-			if (!_isSpawning) return;
-
-			int randomIndex = Random.Range(0, spawnPoints.Length);
-			Instantiate(woodPrefab, spawnPoints[randomIndex].position, Quaternion.identity);
+			for (int i = 0; i < numberOfWoodsToSpawn; i++)
+			{
+				int randomIndex = Random.Range(0, spawnPoints.Length);
+				Transform spawnPoint = spawnPoints[randomIndex];
+				
+				Instantiate(woodPrefab, spawnPoint.position, spawnPoint.rotation);
+				
+				yield return new WaitForSeconds(0.5f);
+			}
 		}
 	}
 }
